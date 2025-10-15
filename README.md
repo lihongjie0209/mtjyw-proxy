@@ -47,6 +47,7 @@ docker rm ctctc-proxy
 - 代理目标: https://www.ctctc.cn/
 - HTTPS自动申请: 已禁用
 - 日志输出: 控制台输出
+- 特殊路由: `/serverip` - 获取服务器出口IP
 
 ## 访问方式
 
@@ -55,7 +56,17 @@ docker rm ctctc-proxy
 - http://localhost （如果在本地运行）
 - http://your-server-ip （如果在服务器上运行）
 
-所有请求将被代理到 https://www.ctctc.cn/
+### 特殊路由
+
+- **`/serverip`**: 获取服务器的出口IP地址
+  ```bash
+  curl http://localhost/serverip
+  # 返回: {"ip":"xxx.xxx.xxx.xxx"}
+  ```
+
+### 代理功能
+
+所有其他请求将被代理到 https://www.ctctc.cn/
 
 ## 注意事项
 

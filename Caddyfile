@@ -2,6 +2,11 @@
 
 # 监听80端口
 :80 {
+    # 特殊路由：获取服务器出口IP - 重定向到API服务
+    handle /serverip {
+        redir https://api.ipify.org?format=json 302
+    }
+    
     # 反向代理到目标网站
     reverse_proxy https://www.ctctc.cn {
         # 保持原始Host头
