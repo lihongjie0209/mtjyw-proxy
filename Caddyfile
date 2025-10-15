@@ -1,0 +1,25 @@
+# Caddy配置文件 - 代理所有请求到 https://www.ctctc.cn/
+
+# 监听80端口
+:80 {
+    # 反向代理到目标网站
+    reverse_proxy https://www.ctctc.cn {
+        # 保持原始Host头
+        header_up Host www.ctctc.cn
+        
+        # 传递客户端真实IP
+        # header_up X-Real-IP {remote_host}
+        # header_up X-Forwarded-For {remote_host}
+        # header_up X-Forwarded-Proto {scheme}
+        
+        # 处理响应头
+        header_down -Server
+        header_down Location localhost {host}
+    }
+    
+    # 日志记录
+    log {
+        output stdout
+        format console
+    }
+}

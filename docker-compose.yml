@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  caddy-proxy:
+    build: .
+    container_name: ctctc-proxy
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    environment:
+      - CADDY_VERSION=2.7
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    driver: bridge
